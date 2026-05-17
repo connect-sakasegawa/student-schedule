@@ -67,7 +67,7 @@ h2{font-size:18px;font-weight:600;margin-bottom:4px}
   <div class="sending" id="sending">送信中...</div>
   <div class="done" id="done">
     <h3>送信完了</h3>
-    <p>スケジュールを受付しました。<br><br>後ほど教室より提出いただいた希望用紙の控えをLINEでご返送いたしますので、そちらの内容をご確認ください。<br><br>スケジュールに変更がある場合は教室までLINEでご連絡ください。</p>
+    <p>スケジュール表を受付しました。<br><br>後ほど、教室よりご提出いただいたスケジュール希望表のお控えをLINEにてお送りいたしますので、内容をご確認ください。<br><br>なお、スケジュールに変更がございましたら、教室までLINEにてご連絡ください。</p>
   </div>
 </div>
 <script>
@@ -159,7 +159,7 @@ function handleSubmit(){
     const dow=d.getDay();
     times.forEach((t,i)=>{
       if(state[key][i]){
-        available.push(`${d.getMonth()+1}/${d.getDate()}（${weeks[dow]}）${t.label}（${t.time}）`);
+        available.push(`${d.getMonth()+1}/${d.getDate()}（${weeks[dow]}）${t.label}`);
       }
     });
   });
@@ -169,7 +169,7 @@ function handleSubmit(){
     method:'POST',
     mode:'no-cors',
     headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({name:STUDENT_NAME,month:'7月',available:available.join('\n'),timestamp:new Date().toLocaleString('ja-JP')})
+    body:JSON.stringify({name:STUDENT_NAME,month:'7月',available:available,timestamp:new Date().toLocaleString('ja-JP')})
   }).then(()=>{
     document.getElementById('sending').style.display='none';
     document.getElementById('done').style.display='block';
